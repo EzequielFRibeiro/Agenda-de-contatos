@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Contatos </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #6d0746;
+        }
+        
+        .formulario {
+            background-color: #8a5403;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .campo {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #965f5f;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: rgb(97, 159, 230);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #d8baba;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .sem-contatos {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agenda de Contatos</h1>
+    
+    <div class="formulario">
+        <h2>Adicionar Contato</h2>
+        <div class="campo">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite o nome">
+        </div>
+        
+        <div class="campo">
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" placeholder="Digite o telefone">
+        </div>
+        
+        <button id="cadastrar">Cadastrar</button>
+    </div>
+    
+    <h2>Contatos Cadastrados</h2>
+    <table id="tabela-contatos">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody id="lista-contatos">
+            
+        </tbody>
+    </table>
+    
+    <script>
+        
+        const nomeInput = document.getElementById('nome');
+        const telefoneInput = document.getElementById('telefone');
+        const cadastrarBtn = document.getElementById('cadastrar');
+        const listaContatos = document.getElementById('lista-contatos');
+        
+      
+        function adicionarContato() {
+            const nome = nomeInput.value.trim();
+            const telefone = telefoneInput.value.trim();
+            
+            
+            if (!nome || !telefone) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+           
+            const novaLinha = document.createElement('tr');
+            
+            
+            const celulaNome = document.createElement('td');
+            celulaNome.textContent = nome;
+            
+            const celulaTelefone = document.createElement('td');
+            celulaTelefone.textContent = telefone;
+            
+            
+            novaLinha.appendChild(celulaNome);
+            novaLinha.appendChild(celulaTelefone);
+            
+            
+            listaContatos.appendChild(novaLinha);
+            
+           
+            nomeInput.value = '';
+            telefoneInput.value = '';
+            
+            
+            nomeInput.focus();
+        }
+        
+       
+        cadastrarBtn.addEventListener('click', adicionarContato);
+        
+        
+        telefoneInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                adicionarContato();
+            }
+        });
+    </script>
+</body>
+</html>
